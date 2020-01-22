@@ -25,14 +25,12 @@ class MeanYearsOneQuarter(Process):
             LiteralInput(
                 'year_min', 'Minimum year to process in range 1970:2014',
                 data_type='integer', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE,
-                # allowed_values=(1970, 2014)
+                mode=MODE.SIMPLE, allowed_values=[yr for yr in range(1970, 2015)]
             ),
             LiteralInput(
                 'year_max', 'Maximum year to process in range 1970:2014',
                 data_type='integer', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE,
-                # allowed_values=(1970, 2014)
+                mode=MODE.SIMPLE, allowed_values=[yr for yr in range(1970, 2015)]
             ),
             LiteralInput(
                 'quarter', 'Quarter to process in range 1:4',
@@ -84,7 +82,7 @@ class MeanYearsOneQuarter(Process):
             status_supported=True)
 
     def _handler(self, request, response):
-        log = logging.getLogger(__name__)
+        # log = logging.getLogger(__name__)
 
         yr_min = request.inputs['year_min'][0].data
         yr_max = request.inputs['year_max'][0].data
@@ -93,19 +91,9 @@ class MeanYearsOneQuarter(Process):
         lat_max = request.inputs['lat_max'][0].data
         lon_min = request.inputs['lon_min'][0].data
         lon_max = request.inputs['lon_max'][0].data
+
         out_csv = os.path.join(self.workdir, 'out.csv')
-
-        # v = request.inputs['variables'][0].data
         variables = [v.data for v in request.inputs['variables']]
-        # variables = [v]
-
-        log.debug("yr_min: {}".format(yr_min))
-        log.debug("yr_max: {}".format(yr_max))
-        log.debug("qtr: {}".format(qtr))
-        log.debug("lat_min: {}".format(lat_min))
-        log.debug("lat_max: {}".format(lat_max))
-        log.debug("lon_min: {}".format(lon_min))
-        log.debug("lon_max: {}".format(lon_max))
 
         worker = EcoComposer(variables)
         worker.process_years_one_quarter(out_csv,
@@ -113,5 +101,6 @@ class MeanYearsOneQuarter(Process):
                                          qtr,
                                          (lat_min, lat_max),
                                          (lon_min, lon_max))
+
         response.outputs['output'].file = out_csv
         return response
