@@ -25,38 +25,28 @@ class MeanOneYearAllQuarters(Process):
             LiteralInput(
                 'year', 'Year to process in range 1970:2014',
                 data_type='integer', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE, allowed_values=[i for i in range(1970, 2015)]
+                mode=MODE.SIMPLE, allowed_values=[[1970, 2014]]
             ),
             LiteralInput(
                 'lat_min', 'Latitude minimum value to process in range -43.735:-9.005',
                 data_type='float', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE,
-                # allowed_values=(-43.735, -9.005)
+                mode=MODE.SIMPLE, allowed_values=[[-43.735, -9.005]]
             ),
             LiteralInput(
                 'lat_max', 'Latitude maximum value to process in range -43.735:-9.005',
                 data_type='float', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE,
-                # allowed_values=(-43.735, -9.005)
+                mode=MODE.SIMPLE, allowed_values=[[-43.735, -9.005]]
             ),
             LiteralInput(
                 'lon_min', 'Longitude minimum value to process in range 112.905:153.995',
                 data_type='float', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE,
-                # allowed_values=(112.905, 153.995)
+                mode=MODE.SIMPLE, allowed_values=[[112.905, 153.995]]
             ),
             LiteralInput(
                 'lon_max', 'Longitude maximum value to process in range 112.905:153.995',
                 data_type='float', min_occurs=1, max_occurs=1,
-                mode=MODE.SIMPLE,
-                # allowed_values=(112.905, 153.995)
+                mode=MODE.SIMPLE, allowed_values=[[112.905, 153.995]]
             ),
-            # BoundingBoxInput(
-            #     'coords', 'Coordinates of the rectangular geometry to process',
-            #     crss='EPSG:4326',
-            #     abstract='Latitude in range -43.735:-9.005. Longitude in range 112.905:153.995',
-            #     dimensions=2, min_occurs=1, max_occurs=1, mode=MODE.NONE
-            # ),
         ]
 
         outputs = [
