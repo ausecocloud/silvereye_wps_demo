@@ -14,6 +14,7 @@ from silvereye_wps_demo.processes.mean_years_one_month import MeanYearsOneMonth
 from silvereye_wps_demo.processes.mean_years_one_quarter import MeanYearsOneQuarter
 from silvereye_wps_demo.processes.mean_years import MeanYears
 from silvereye_wps_demo.processes.mean_one_year import MeanOneYear
+from silvereye_wps_demo.processes.mean_year_month_range import MeanYearMonthRange
 
 processes = [
     MeanOneYearAllMonths(),
@@ -27,6 +28,7 @@ processes = [
     MeanYearsOneQuarter(),
     MeanOneYear(),
     MeanYears(),
+    MeanYearMonthRange(),
 ]
 
 service = Service(processes, ['/etc/silvereye/pywps.cfg'])

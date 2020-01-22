@@ -25,7 +25,7 @@ class CSVArrayWriter:
                 # make a row with data from columns
                 row = []
                 for j in range(col_count):
-                    print(j)
+                    # print(j)
                     row.append(self.data[j][i])  # data is by cols
                 writer.writerow(tuple(row))
 

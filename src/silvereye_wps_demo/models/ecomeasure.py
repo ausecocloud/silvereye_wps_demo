@@ -351,3 +351,23 @@ class EcoMeasure(object):
             mean = self.mean_by_year(yr, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result
+
+    def mean_fromto_year_month_range(self,
+                                     yrmo_from: Tuple[int, int],
+                                     yrmo_to: Tuple[int, int],
+                                     lat_range: Tuple[float, float],
+                                     lon_range: Tuple[float, float]):
+        """
+        Calculates the monthly means from year-month to year-month
+        :param yrmo_from: starting year-month tuple, with year in range 1970:2014 and month in 1:12
+        :param yrmo_to: ending year-month tuple, with year in range 1970:2014 and month in 1:12
+        :param lat_range: latitude range
+        :param lon_range: longitude range
+        :return: NumPy array flat
+        """
+        result = np.array([])
+        range_of_year_months = Indexers.fromto_yrmo_as_vector(yrmo_from, yrmo_to)
+        for (yr, mo) in range_of_year_months:
+            mean = self.mean_by_month(yr, mo, lat_range, lon_range)
+            result = np.concatenate((result, mean.flatten()), axis=0)
+        return result

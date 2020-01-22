@@ -36,25 +36,31 @@ env/bin/pserve development.ini --reload
 ## To Invoke
 
 The following processes have been implemented:
-*    mean_one_year_all_months
-*    mean_one_year_all_quarters
-*    mean_one_year_month_range
-*    mean_one_year_one_month
-*    mean_one_year_one_quarter
-*    mean_years_all_months
-*    mean_years_all_quarters
-*    mean_years_one_month
-*    mean_years_one_quarter
-*    mean_one_year
-*    mean_years
+* mean_one_year_all_months
+* mean_one_year_all_quarters
+* mean_one_year_month_range
+* mean_one_year_one_month
+* mean_one_year_one_quarter
+* mean_years_all_months
+* mean_years_all_quarters
+* mean_years_one_month
+* mean_years_one_quarter
+* mean_one_year
+* mean_years
+* mean_year_month_range
 
 Inputs to the processes are:
 * year (int), or range of years, in the range 1970:2014
 * month (int), or range of months, in the range 1:12
+* year-month to year-month, within the ranges specified above
 * quarter (int) in the range 1:4
 * latitude pair (floats) (min, max) in the range -43.735:-9.005
 * longitude pair (floats) (min, max) in the range 112.905:153.995
 
+For specific inputs to each process, check the files under:
+```shell
+src/silvereye_wps_demo/processes/mean_*.py
+```
 ### Sample Invocation:
 
 Endpoint: `POST http://0.0.0.0:6543/wps`
@@ -141,7 +147,7 @@ Payload (Body):
 
 ## Troubleshooting 
 
-If the above dependencies installation fails, 
+If the above installation of dependencies fails, 
 or misses something, try the following:
 
 Install dependencies:

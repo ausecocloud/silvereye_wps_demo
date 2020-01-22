@@ -540,3 +540,58 @@ class EcoComposer:
         # report[j] with 0 < j < total_cols has all the data, by column
         csv = CSVArrayWriter(file_name, field_names, report)
         csv.write()
+
+    def process_fromto_year_month_range(self,
+                                        file_name: str,
+                                        yrmo_from: Tuple[int, int],
+                                        yrmo_to: Tuple[int, int],
+                                        lat_range: Tuple[float, float],
+                                        lon_range: Tuple[float, float]):
+        """
+        processes the monthly means for a range of months, within years
+        :param file_name: path to output file to write into
+        :param yrmo_from: starting year-month tuple, with year in range 1970:2014 and month in 1:12
+        :param yrmo_to: ending year-month tuple, with year in range 1970:2014 and month in 1:12
+        :param lat_range: latitudes
+        :param lon_range: longitudes
+        :return: None, outputs a csv file
+        """
+        (yr_from, mo_from) = yrmo_from
+        (yr_to, mo_to) = yrmo_to
+
+        is_valid = len(self.instances.keys()) > 0 \
+                   and Validators.is_valid_year(yr_from) \
+                   and Validators.is_valid_year(yr_to) \
+                   and yr_from <= yr_to \
+                   and Validators.is_valid_month(mo_from) \
+                   and Validators.is_valid_month(mo_to) \
+                   and Validators.is_valid_range(lat_range, "lat") \
+                   and Validators.is_valid_range(lon_range, "lon")
+        if not is_valid:
+            raise ValueError("ecoComposer::process_fromto_year_month_range(): Invalid parameters")
+
+        # make the time, latitude and longitude columns
+        lat_col = Indexers.lat_as_vector(lat_range)
+        lon_col = Indexers.lon_as_vector(lon_range)
+        time_col = Indexers.fromto_yrmo_as_string_vector(yrmo_from, yrmo_to)
+        lat_size = len(lat_col)
+        lon_size = len(lon_col)
+        time_size = len(time_col)
+
+        # prepare report series columns, and headers
+        report = [
+            np.repeat(time_col, lat_size * lon_size),
+            np.tile(np.repeat(lat_col, lon_size), time_size),
+            np.tile(lon_col, lat_size * time_size)]
+        field_names = ["year-month", "lat", "lon"]
+
+        # now, process variables, and collect results
+        for v in self.variables:
+            field_names.append(self.instances[v].column_name())
+            result = self.instances[v].mean_fromto_year_month_range(yrmo_from, yrmo_to,
+                                                                    lat_range, lon_range)
+            report.append(result.flatten())
+
+        # report[j] with 0 < j < total_cols has all the data, by column
+        csv = CSVArrayWriter(file_name, field_names, report)
+        csv.write()

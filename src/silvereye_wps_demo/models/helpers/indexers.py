@@ -198,12 +198,55 @@ class Indexers(object):
         (yr_lo, yr_hi) = year_range
         return ["{:04d}".format(yr) for yr in range(yr_lo, yr_hi + 1)]
 
+    @staticmethod
+    def fromto_yrmo_as_vector(yrmo_from: Tuple[int, int],
+                              yrmo_to: Tuple[int, int]) -> List[Tuple[int, int]]:
+        (yr_from, mo_from) = yrmo_from
+        (yr_to, mo_to) = yrmo_to
+
+        if yr_from == yr_to:
+            return [(yr_from, mo) for mo in range(mo_from, mo_to+1)]
+        else:
+            result = []
+            # first year
+            result.append([(yr_from, mo) for mo in range(mo_from, 13)])
+            # intermediate whole years
+            for yr in range(yr_from+1, yr_to):
+                result.append([(yr, mo) for mo in range(1, 13)])
+            # last year
+            result.append([(yr_to, mo) for mo in range(1, mo_to+1)])
+            # flatten list
+            return [item for sublist in result for item in sublist]
+
+    def fromto_yrmo_as_string_vector(yrmo_from: Tuple[int, int],
+                                     yrmo_to: Tuple[int, int]) -> List[Tuple[int, int]]:
+        (yr_from, mo_from) = yrmo_from
+        (yr_to, mo_to) = yrmo_to
+
+        if yr_from == yr_to:
+            return ["{:04d}-{:02d}".format(yr_from, mo) for mo in range(mo_from, mo_to+1)]
+        else:
+            result = []
+            # first year
+            result.append(["{:04d}-{:02d}".format(yr_from, mo) for mo in range(mo_from, 13)])
+            # intermediate whole years, if any
+            for yr in range(yr_from+1, yr_to):
+                result.append(["{:04d}-{:02d}".format(yr, mo) for mo in range(1, 13)])
+            # last year
+            result.append(["{:04d}-{:02d}".format(yr_to, mo) for mo in range(1, mo_to+1)])
+            # flatten list
+            return [item for sublist in result for item in sublist]
+
+
 if __name__ == '__main__':
+    pass
     # v = Indexers.lat_as_vector((-28.985, -27.925))
     # v = Indexers.lon_as_vector((153.1935, 153.5335))
     # v = Indexers.year_as_monthly_vector(1990)
     # v = Indexers.years_as_monthly_vector((1990, 1992))
     # v = Indexers.years_quarter_as_vector((2001, 2005), 3)
     # v = Indexers.years_as_quarterly_vector((2001, 2005))
-    v = Indexers.year_as_quarterly_vector(2001)
-    print(v)
+    # v = Indexers.year_as_quarterly_vector(2001)
+    # v = Indexers.fromto_yrmo_as_vector((1990, 3), (1992, 7))
+    # v = Indexers.fromto_yrmo_as_vector((1990, 10), (1991, 3))
+    # print(v)
