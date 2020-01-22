@@ -11,7 +11,7 @@ from pywps import configuration as config
 @view_config(route_name='status')
 def status(request):
     statuspath = os.path.abspath(config.get_config_value('server', 'statuspath'))
-    filepath = os.path.abspath(os.path.join(statuspath, '/'.join(request.matchdict['filename'])))
+    filepath = os.path.abspath(os.path.join(statuspath, '/'.join(request.matchdict['filename']) + ".xml"))
     if not (filepath.startswith(statuspath) and os.path.exists(filepath)):
         raise HTTPNotFound()
     # serve status.xml

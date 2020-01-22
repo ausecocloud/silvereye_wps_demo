@@ -20,9 +20,10 @@ python -m venv env
 source env/bin/activate
 ```
 
-Install dependencies:
+Install dependencies and set up project:
 ```shell 
-pip install -r requirements.txt
+pip install -e .
+python setup.py develop
 ```
 
 ## To Execute 

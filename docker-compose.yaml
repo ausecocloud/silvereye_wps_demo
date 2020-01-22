@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  silvereye_wps:
+    container_name: silvereye_wps
+    build:
+        context: .
+    ports:
+      - "6543:6543"
+    volumes:
+      - ./volumes/wps_workdir:/pywps
+      - ./volumes/wps_log:/pywps-log
+      - ./src/silvereye_wps_demo:/etc/silvereye/src/silvereye_wps_demo
+      - ./pywps.cfg:/etc/silvereye/pywps.cfg
