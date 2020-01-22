@@ -54,6 +54,10 @@ Inputs to the processes are:
 * latitude pair (floats) (min, max) in the range -43.735:-9.005
 * longitude pair (floats) (min, max) in the range 112.905:153.995
 
+For specific inputs to each process, check the files under:
+```shell
+src/silvereye_wps_demo/processes/mean_*.py
+```
 ### Sample Invocation:
 
 Endpoint: `POST http://0.0.0.0:6543/wps`
@@ -140,7 +144,7 @@ Payload (Body):
 
 ## Troubleshooting 
 
-If the above dependencies installation fails, 
+If the above installation of dependencies fails, 
 or misses something, try the following:
 
 Install dependencies:
