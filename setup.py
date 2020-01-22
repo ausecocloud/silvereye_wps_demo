@@ -4,8 +4,15 @@ version = '0.1'
 
 # List of dependencies installed via `pip install -e .`
 # by virtue of the Setuptools `install_requires` value below.
-requires = [
+install_requires = [
+    'setuptools',
+    'paste',
+    'numpy',
+    'pydap',
     'pyramid',
+    'pywps',
+    'python-swiftclient',
+    'python-keystoneclient',
     'pyramid_chameleon',
     'waitress',
 ]
@@ -18,6 +25,7 @@ dev_requires = [
     'pytest',
     'webtest',
 ]
+
 setup(
     name='silvereye_wps_demo',
     version=version,
@@ -48,13 +56,7 @@ setup(
     namespace_packages=[],
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        'setuptools',
-        'pyramid',
-        'pywps',
-        'python-swiftclient',
-        'python-keystoneclient'
-    ],
+    install_requires=install_requires,
     entry_points={
         'paste.app_factory': [
             'main = silvereye_wps_demo:main',
