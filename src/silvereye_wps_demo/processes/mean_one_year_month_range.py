@@ -70,8 +70,8 @@ class MeanOneYearMonthRange(Process):
         super(MeanOneYearMonthRange, self).__init__(
             self._handler,
             identifier='mean_one_year_month_range',
-            title='ANUClim monthly means within a range of months in one year.',
-            abstract="Computes mean for env vars at location and time from ANUClimate daily climate grids.",
+            title='ANUClim monthly means within range of months in one year.',
+            abstract="Computes mnothly averages (means) for env vars at location and time from ANUClimate daily climate grids.",
             version='1',
             metadata=[],
             inputs=inputs,

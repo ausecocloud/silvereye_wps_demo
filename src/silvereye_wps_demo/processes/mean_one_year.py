@@ -60,8 +60,8 @@ class MeanOneYear(Process):
         super(MeanOneYear, self).__init__(
             self._handler,
             identifier='mean_one_year',
-            title='ANUClim yearly mean for one year in range 1970:2014.',
-            abstract="Computes mean for env vars at location and time from ANUClimate daily climate grids.",
+            title='ANUClim yearly means for one year.',
+            abstract="Computes yearly averages (mean) for env vars at location and time from ANUClimate daily climate grids.",
             version='1',
             metadata=[],
             inputs=inputs,

@@ -58,8 +58,8 @@ class MeanOneYearAllQuarters(Process):
         super(MeanOneYearAllQuarters, self).__init__(
             self._handler,
             identifier='mean_one_year_all_quarters',
-            title='ANUClim means by quarters for one year.',
-            abstract="Computes mean for env vars at specific location and time from ANUClimate daily climate grids.",
+            title='ANUClim quarterly means for one whole year.',
+            abstract="Computes quarterly averages (means) for env vars at specific location and time from ANUClimate daily climate grids.",
             version='1',
             metadata=[],
             inputs=inputs,
