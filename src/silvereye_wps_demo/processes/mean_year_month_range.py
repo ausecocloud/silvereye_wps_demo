@@ -76,7 +76,7 @@ class MeanYearMonthRange(Process):
             self._handler,
             identifier='mean_year_month_range',
             title='ANUClim monthly means within a range of year-month periods.',
-            abstract="Computes mean for env vars at location and time from ANUClimate daily climate grids.",
+            abstract="Computes monthly averages (means) for env vars at location and time from ANUClimate daily climate grids.",
             version='1',
             metadata=[],
             inputs=inputs,
