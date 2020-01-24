@@ -1,4 +1,3 @@
-
 # README.md
 
 ## Introduction
@@ -94,7 +93,7 @@ Inputs depend on each process, and include:
 * year-month to year-month, within the ranges specified above.
 * quarter (int), with values between 1 and 4.
 * latitude pair (floats) (min, max), with values in the range -43.735:-9.005
-* longitude pair (floats) (min, max), with in the range 112.905:153.995
+* longitude pair (floats) (min, max), with values in the range 112.905:153.995
 
 For specific inputs to each process, check the files under:
 ```shell
