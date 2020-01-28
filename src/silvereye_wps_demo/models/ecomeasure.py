@@ -39,7 +39,7 @@ class EcoMeasure(object):
         return self.data['ds'][self.data['variable']]
 
     def column_name(self):
-        return self.data["name"] + '_Mean'
+        return self.data["name"]
 
     def slice(self,
               time_range: Tuple[str, str],
@@ -91,21 +91,21 @@ class EcoMeasure(object):
             lon_hi_idx = Indexers.get_lon_idx(lon_hi)
 
             # debug data
-            time_size = time_hi_idx - time_lo_idx + 1
-            lat_size = abs(lat_hi_idx - lat_lo_idx) + 1
-            lon_size = lon_hi_idx - lon_lo_idx + 1
-            self.debug['time_size'] = time_size
-            self.debug['lat_size'] = lat_size
-            self.debug['lon_size'] = lon_size
-            self.debug['dimensions'] = (time_size, lat_size, lon_size)
-            total_size = time_size * lat_size * lon_size
-            self.debug['total_size'] = total_size
-            self.debug['time_lo_idx'] = time_lo_idx
-            self.debug['time_hi_idx'] = time_hi_idx
-            self.debug['lat_lo_idx'] = lat_lo_idx
-            self.debug['lat_hi_idx'] = lat_hi_idx
-            self.debug['lon_lo_idx'] = lon_lo_idx
-            self.debug['lon_hi_idx'] = lon_hi_idx
+            # time_size = time_hi_idx - time_lo_idx + 1
+            # lat_size = abs(lat_hi_idx - lat_lo_idx) + 1
+            # lon_size = lon_hi_idx - lon_lo_idx + 1
+            # self.debug['time_size'] = time_size
+            # self.debug['lat_size'] = lat_size
+            # self.debug['lon_size'] = lon_size
+            # self.debug['dimensions'] = (time_size, lat_size, lon_size)
+            # total_size = time_size * lat_size * lon_size
+            # self.debug['total_size'] = total_size
+            # self.debug['time_lo_idx'] = time_lo_idx
+            # self.debug['time_hi_idx'] = time_hi_idx
+            # self.debug['lat_lo_idx'] = lat_lo_idx
+            # self.debug['lat_hi_idx'] = lat_hi_idx
+            # self.debug['lon_lo_idx'] = lon_lo_idx
+            # self.debug['lon_hi_idx'] = lon_hi_idx
 
             # return slice
             return self.data['ds'][self.data['variable']][
@@ -145,7 +145,8 @@ class EcoMeasure(object):
         :return: NumPy array flat
         """
         result = np.array([])
-        for mo in range(1, 13):
+        mo_range = range(1, 13)
+        for mo in mo_range:
             mean = self.mean_by_month(year, mo, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -163,8 +164,10 @@ class EcoMeasure(object):
         """
         (yr_lo, yr_hi) = yr_range
         result = np.array([])
-        for yr in range(yr_lo, yr_hi + 1):
-            for mo in range(1, 13):
+        years_range = range(yr_lo, yr_hi + 1)
+        mo_range = range(1, 13)
+        for yr in years_range:
+            for mo in mo_range:
                 mean = self.mean_by_month(yr, mo, lat_range, lon_range)
                 result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -184,7 +187,8 @@ class EcoMeasure(object):
         """
         (yr_lo, yr_hi) = yr_range
         result = np.array([])
-        for yr in range(yr_lo, yr_hi + 1):
+        years_range = range(yr_lo, yr_hi + 1)
+        for yr in years_range:
             mean = self.mean_by_month(yr, mo, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -255,7 +259,8 @@ class EcoMeasure(object):
         :return: NumPy Array flattened to one-dimension vector
         """
         result = np.array([])
-        for qtr in range(1, 5):
+        quarters_range = range(1, 5)
+        for qtr in quarters_range:
             mean = self.mean_by_quarter(year, qtr, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -273,8 +278,10 @@ class EcoMeasure(object):
         """
         (yr_lo, yr_hi) = yr_range
         result = np.array([])
-        for yr in range(yr_lo, yr_hi + 1):
-            for qtr in range(1, 5):
+        years_range = range(yr_lo, yr_hi + 1)
+        quarters_range = range(1, 5)
+        for yr in years_range:
+            for qtr in quarters_range:
                 mean = self.mean_by_quarter(yr, qtr, lat_range, lon_range)
                 result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -294,7 +301,8 @@ class EcoMeasure(object):
         """
         (yr_lo, yr_hi) = yr_range
         result = np.array([])
-        for yr in range(yr_lo, yr_hi + 1):
+        years_range = range(yr_lo, yr_hi + 1)
+        for yr in years_range:
             mean = self.mean_by_quarter(yr, qtr, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -314,7 +322,8 @@ class EcoMeasure(object):
         """
         (mo_min, mo_max) = mo_range
         result = np.array([])
-        for mo in range(mo_min, mo_max + 1):
+        months_range = range(mo_min, mo_max + 1)
+        for mo in months_range:
             mean = self.mean_by_month(year, mo, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result
@@ -347,7 +356,8 @@ class EcoMeasure(object):
         """
         (yr_min, yr_max) = yr_range
         result = np.array([])
-        for yr in range(yr_min, yr_max + 1):
+        years_range = range(yr_min, yr_max + 1)
+        for yr in years_range:
             mean = self.mean_by_year(yr, lat_range, lon_range)
             result = np.concatenate((result, mean.flatten()), axis=0)
         return result

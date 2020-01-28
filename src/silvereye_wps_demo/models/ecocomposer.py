@@ -25,10 +25,10 @@ class EcoComposer:
     def _valid_vars(self) -> bool:
         """ensures the requested processes are within our capabilities"""
         valid_vars = [
+            "rainfall",
+            "solar_radiation",
             "temp_max",
             "temp_min",
-            "solar_radiation",
-            "rainfall",
             "vapour_pressure"
         ]
         for v in self.variables:
@@ -206,7 +206,7 @@ class EcoComposer:
                    and Validators.is_valid_range(lat_range, "lat") \
                    and Validators.is_valid_range(lon_range, "lon")
         if not is_valid:
-            raise ValueError("ecoComposer.process_years_one_month(): Invalid parameters")
+            raise ValueError("ecoComposer::process_years_one_month(): Invalid parameters")
 
         # make the time, latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)
@@ -290,7 +290,7 @@ class EcoComposer:
                    and Validators.is_valid_range(lat_range, "lat") \
                    and Validators.is_valid_range(lon_range, "lon")
         if not is_valid:
-            raise ValueError("ecoComposer.process_one_year_all_quarters(): Invalid parameters")
+            raise ValueError("ecoComposer::process_one_year_all_quarters(): Invalid parameters")
 
         # make the time, latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)
@@ -333,7 +333,7 @@ class EcoComposer:
                    and Validators.is_valid_range(lat_range, "lat") \
                    and Validators.is_valid_range(lon_range, "lon")
         if not is_valid:
-            raise ValueError("ecoComposer.process_years_all_quarters(): Invalid parameters")
+            raise ValueError("ecoComposer::process_years_all_quarters(): Invalid parameters")
 
         # make the time, latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)
@@ -380,7 +380,7 @@ class EcoComposer:
                    and Validators.is_valid_range(lat_range, "lat") \
                    and Validators.is_valid_range(lon_range, "lon")
         if not is_valid:
-            raise ValueError("ecoComposer.process_years_one_quarter(): Invalid parameters")
+            raise ValueError("ecoComposer::process_years_one_quarter(): Invalid parameters")
 
         # make the time, latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)
@@ -428,7 +428,7 @@ class EcoComposer:
                    and Validators.is_valid_range(lat_range, "lat") \
                    and Validators.is_valid_range(lon_range, "lon")
         if not is_valid:
-            raise ValueError("ecoComposer.process_one_year_month_range(): Invalid parameters")
+            raise ValueError("ecoComposer::process_one_year_month_range(): Invalid parameters")
 
         # make the time, latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)
@@ -473,7 +473,7 @@ class EcoComposer:
                    and Validators.is_valid_range(lat_range, "lat") \
                    and Validators.is_valid_range(lon_range, "lon")
         if not is_valid:
-            raise ValueError("ecoComposer.process_one_year(): Invalid parameters")
+            raise ValueError("ecoComposer::process_one_year(): Invalid parameters")
 
         # make the time, latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)

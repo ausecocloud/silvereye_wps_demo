@@ -21,12 +21,11 @@ class CSVArrayWriter:
             writer.writerow(self.field_names)
             row_count = len(self.data[-1])
             col_count = len(self.data)
-            for i in range(row_count):
+            row_range = range(row_count)
+            col_range = range(col_count)
+            for i in row_range:
                 # make a row with data from columns
-                row = []
-                for j in range(col_count):
-                    # print(j)
-                    row.append(self.data[j][i])  # data is by cols
+                row = [self.data[j][i] for j in col_range]  # data is by cols
                 writer.writerow(tuple(row))
 
 

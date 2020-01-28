@@ -85,20 +85,18 @@ class Indexers(object):
         return [round(n, 3) for n in v]
 
     @staticmethod
-    def year_as_monthly_vector(year: int):
+    def year_as_monthly_vector(year: int) -> List[str]:
         """
         Converts a given time range into a list of iso strings per month
         Example: f(1995) -> ['1995-01', '1995-02', ..., '1995-12']
         :param year: year in range 1970..2014
         :return: a NumPy Array of strings
         """
-        vector = []
-        for mo in range(1, 13):
-            vector.append("{:04d}-{:02d}".format(year, mo))
-        return vector
+        mo_range = range(1, 13)
+        return ["{:04d}-{:02d}".format(year, mo) for mo in mo_range]
 
     @staticmethod
-    def year_months_as_vector(year: int, mo_range: Tuple[int, int]):
+    def year_months_as_vector(year: int, mo_range: Tuple[int, int]) -> List[str]:
         """
         Converts a given time range into a list of iso strings per month
         Example: f(1995) -> ['1995-01', '1995-02', ..., '1995-12']
@@ -106,58 +104,50 @@ class Indexers(object):
         :return: a NumPy Array of strings
         """
         (mo_min, mo_max) = mo_range
-        vector = []
-        for mo in range(mo_min, mo_max + 1):
-            vector.append("{:04d}-{:02d}".format(year, mo))
-        return vector
+        r = range(mo_min, mo_max + 1)
+        return ["{:04d}-{:02d}".format(year, mo) for mo in r]
 
     @staticmethod
-    def years_as_monthly_vector(year_range: Tuple[int, int]):
+    def years_as_monthly_vector(yr_range: Tuple[int, int]) -> List[str]:
         """
         Converts a given time range into a list of iso strings per month
         Example: f((2001, 2003)) -> ['2001-01', ..., '2001-12',
                                      '2002-01', ..., '2002-12',
                                      '2003-01', ..., '2003-12']
-        :param year_range: years in range 1970..2014
+        :param yr_range: years in range 1970..2014
         :return: a NumPy Array of strings
         """
-        vector = []
-        (yr_lo, yr_hi) = year_range
-        for yr in range(yr_lo, yr_hi + 1):
-            for mo in range(1, 13):
-                vector.append("{:04d}-{:02d}".format(yr, mo))
-        return vector
+        (yr_lo, yr_hi) = yr_range
+        years_range = range(yr_lo, yr_hi + 1)
+        mo_range = range(1, 13)
+        return ["{:04d}-{:02d}".format(yr, mo) for yr in years_range for mo in mo_range]
 
     @staticmethod
-    def years_month_as_vector(year_range: Tuple[int, int], mo: int):
+    def years_month_as_vector(yr_range: Tuple[int, int], mo: int) -> List[str]:
         """
         Converts a given year range into a list of iso strings with only one month per year.
         Example: f((1991, 1995), 2) -> ['1991-02', '1992-02', '1993-02', '1994-02', '1995-02']
-        :param year_range: years in range 1970..2014
+        :param yr_range: years in range 1970..2014
         :param mo: desired month in range 1..12
         :return: a NumPy Array of strings
         """
-        vector = []
-        (yr_lo, yr_hi) = year_range
-        for yr in range(yr_lo, yr_hi + 1):
-            vector.append("{:04d}-{:02d}".format(yr, mo))
-        return vector
+        (yr_lo, yr_hi) = yr_range
+        years_range = range(yr_lo, yr_hi + 1)
+        return ["{:04d}-{:02d}".format(yr, mo) for yr in years_range]
 
     @staticmethod
-    def year_as_quarterly_vector(year: int) -> List:
+    def year_as_quarterly_vector(year: int) -> List[str]:
         """
         Converts a given year into a list of iso strings per quarter.
         Example: f(1990) -> ["1990-q1", "1990-q2", "1990-q3", "1990-q4"]
         :param year: year in range 1970..2014
         :return: a List of strings
         """
-        vector = []
-        for qt in range(1, 5):
-            vector.append("{:04d}-q{:1d}".format(year, qt))
-        return vector
+        quarters_range = range(1, 5)
+        return ["{:04d}-q{:1d}".format(year, qt) for qt in quarters_range]
 
     @staticmethod
-    def years_as_quarterly_vector(yr_range: Tuple[int, int]) -> List:
+    def years_as_quarterly_vector(yr_range: Tuple[int, int]) -> List[str]:
         """
         Converts a given year range into a list of iso strings will all quarters per year.
         Example: f((1990,1991)) -> ["1990-q1", "1990-q2", "1990-q3", "1990-q4",
@@ -165,15 +155,13 @@ class Indexers(object):
         :param yr_range: range of years within 1970..2014
         :return: a List of strings
         """
-        vector = []
         (yr_lo, yr_hi) = yr_range
-        for yr in range(yr_lo, yr_hi + 1):
-            for qt in range(1, 5):
-                vector.append("{:04d}-q{:1d}".format(yr, qt))
-        return vector
+        years_range = range(yr_lo, yr_hi + 1)
+        quarters_range = range(1, 5)
+        return ["{:04d}-q{:1d}".format(yr, qt) for yr in years_range for qt in quarters_range]
 
     @staticmethod
-    def years_quarter_as_vector(yr_range: Tuple[int, int], qt: int) -> List:
+    def years_quarter_as_vector(yr_range: Tuple[int, int], qt: int) -> List[str]:
         """
         Converts a given year range into a list of iso strings with one quarter each.
         Example: f((1990,1992), 3) -> ["1990-q3", "1991-q3", "1992-q3"]
@@ -181,14 +169,12 @@ class Indexers(object):
         :param qt: desired quarter
         :return: a List of strings
         """
-        vector = []
         (yr_lo, yr_hi) = yr_range
-        for yr in range(yr_lo, yr_hi + 1):
-            vector.append("{:04d}-q{:1d}".format(yr, qt))
-        return vector
+        r = range(yr_lo, yr_hi + 1)
+        return ["{:04d}-q{:1d}".format(yr, qt) for yr in r]
 
     @staticmethod
-    def years_as_vector(year_range: Tuple[int, int]):
+    def years_as_vector(year_range: Tuple[int, int]) -> List[str]:
         """
         Converts a given year range into a list of iso strings per year
         Example: f((2001, 2003)) -> ['2001', '2002', '2003']
@@ -196,7 +182,8 @@ class Indexers(object):
         :return: a NumPy Array of strings
         """
         (yr_lo, yr_hi) = year_range
-        return ["{:04d}".format(yr) for yr in range(yr_lo, yr_hi + 1)]
+        r = range(yr_lo, yr_hi + 1)
+        return ["{:04d}".format(yr) for yr in r]
 
     @staticmethod
     def fromto_yrmo_as_vector(yrmo_from: Tuple[int, int],
@@ -205,35 +192,46 @@ class Indexers(object):
         (yr_to, mo_to) = yrmo_to
 
         if yr_from == yr_to:
-            return [(yr_from, mo) for mo in range(mo_from, mo_to+1)]
+            mo_same_year_range = range(mo_from, mo_to + 1)
+            return [(yr_from, mo) for mo in mo_same_year_range]
         else:
             result = []
             # first year
-            result.append([(yr_from, mo) for mo in range(mo_from, 13)])
+            mo_first_year_range = range(mo_from, 13)
+            result.append([(yr_from, mo) for mo in mo_first_year_range])
             # intermediate whole years
-            for yr in range(yr_from+1, yr_to):
-                result.append([(yr, mo) for mo in range(1, 13)])
+            whole_year_range = range(yr_from + 1, yr_to)
+            for yr in whole_year_range:
+                whole_mo_range = range(1, 13)
+                result.append([(yr, mo) for mo in whole_mo_range])
             # last year
-            result.append([(yr_to, mo) for mo in range(1, mo_to+1)])
+            mo_last_year_range = range(1, mo_to + 1)
+            result.append([(yr_to, mo) for mo in mo_last_year_range])
             # flatten list
             return [item for sublist in result for item in sublist]
 
+    @staticmethod
     def fromto_yrmo_as_string_vector(yrmo_from: Tuple[int, int],
-                                     yrmo_to: Tuple[int, int]) -> List[Tuple[int, int]]:
+                                     yrmo_to: Tuple[int, int]) -> List[str]:
         (yr_from, mo_from) = yrmo_from
         (yr_to, mo_to) = yrmo_to
 
         if yr_from == yr_to:
-            return ["{:04d}-{:02d}".format(yr_from, mo) for mo in range(mo_from, mo_to+1)]
+            mo_same_year_range = range(mo_from, mo_to + 1)
+            return ["{:04d}-{:02d}".format(yr_from, mo) for mo in mo_same_year_range]
         else:
             result = []
             # first year
-            result.append(["{:04d}-{:02d}".format(yr_from, mo) for mo in range(mo_from, 13)])
+            mo_first_year_range = range(mo_from, 13)
+            result.append(["{:04d}-{:02d}".format(yr_from, mo) for mo in mo_first_year_range])
             # intermediate whole years, if any
-            for yr in range(yr_from+1, yr_to):
-                result.append(["{:04d}-{:02d}".format(yr, mo) for mo in range(1, 13)])
+            whole_year_range = range(yr_from + 1, yr_to)
+            for yr in whole_year_range:
+                whole_mo_range = range(1, 13)
+                result.append(["{:04d}-{:02d}".format(yr, mo) for mo in whole_mo_range])
             # last year
-            result.append(["{:04d}-{:02d}".format(yr_to, mo) for mo in range(1, mo_to+1)])
+            mo_last_year_range = range(1, mo_to + 1)
+            result.append(["{:04d}-{:02d}".format(yr_to, mo) for mo in mo_last_year_range])
             # flatten list
             return [item for sublist in result for item in sublist]
 
