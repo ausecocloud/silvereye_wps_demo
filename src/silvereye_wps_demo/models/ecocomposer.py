@@ -81,10 +81,16 @@ class EcoComposer:
         # make the latitude and longitude columns
         lat_col = Indexers.lat_as_vector(lat_range)
         lon_col = Indexers.lon_as_vector(lon_range)
+        time_col = ["{:4d}-{:02d}".format(yr, mo)]
         lat_size = len(lat_col)
         lon_size = len(lon_col)
-        report = [np.repeat(lat_col, lon_size), np.tile(lon_col, lat_size)]
-        field_names = ["lat", "lon"]
+        time_size = 1
+
+        report = [
+            np.repeat(time_col, lat_size * lon_size),
+            np.repeat(lat_col, lon_size),
+            np.tile(lon_col, lat_size)]
+        field_names = ["year-month", "lat", "lon"]
 
         # now, iterate over variables, and collect results
         for v in self.variables:

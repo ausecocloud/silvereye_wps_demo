@@ -210,6 +210,7 @@ class Indexers(object):
             # flatten list
             return [item for sublist in result for item in sublist]
 
+    @staticmethod
     def fromto_yrmo_as_string_vector(yrmo_from: Tuple[int, int],
                                      yrmo_to: Tuple[int, int]) -> List[str]:
         (yr_from, mo_from) = yrmo_from
