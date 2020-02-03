@@ -10,14 +10,14 @@ from remote databases, via PyDap.
 * It works on specified latitude and longitude rectangular regions, 
 * It produces monthly, quarterly, yearly average time reductions, as follows: 
     * Monthly Averages (Means)
-        * Means for one year one month
+        * Means for one year, one month
         * Means for one year, all months
         * Means for one year, and a range of months
         * Means for a range of years, all months
         * Means for a range of years, one month of each year
         * Means for year-month to year-month interval
     * Quarterly Averages (Means)
-        * Means for one year one quarter
+        * Means for one year, one quarter
         * Means for one year, all quarters
         * Means for a range of years, all quarters
         * Means for a range of years, one quarter of each year
@@ -66,8 +66,18 @@ python setup.py develop
 
 ## To Execute 
 
+To run the application stand-alone (for development):
 ```shell
+cd silvereye_wps_demo
 env/bin/pserve development.ini --reload
+```
+
+
+To run the application as a docker container:
+
+```shell
+docker-compose build
+docker-compose up
 
 ```
 
@@ -100,6 +110,8 @@ For specific inputs to each process, check the files under:
 src/silvereye_wps_demo/processes/mean_*.py
 ```
 ### Sample Invocation:
+
+Invoke it with Insomnia or with Postman.
 
 Endpoint: `POST http://0.0.0.0:6543/wps`
 
@@ -181,6 +193,11 @@ Payload (Body):
 </wps:Execute>
 ```
 
+## Output
+
+If running from a docker container, the output is written to the following folders:
+* `volumes/wps_workdir/outputs` contains out.csv files
+* `volumes/wps_log/pywps-logs.sqlite3` contains a sqlite3 database with the logs.
 
 ## Troubleshooting 
 
