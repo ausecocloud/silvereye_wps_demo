@@ -77,7 +77,7 @@ class TimeConverters(object):
     def yq2trange(yr: int, qtr: int) -> Tuple:
         """
         Converts year quarter to tuple with lo and hi date values in iso format.
-        Example: f(2000, 3) -> ("2000-04-01", "2000-06-30")
+        Example: f(2000, 2) -> ("2000-04-01", "2000-06-30")
         :param yr: year in range 1970..2014
         :param qtr: quarter in range 1..4
         :return: Tuple (date_lo_iso, date_hi_iso)
