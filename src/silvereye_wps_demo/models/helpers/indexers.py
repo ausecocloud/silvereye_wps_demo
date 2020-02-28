@@ -90,7 +90,7 @@ class Indexers(object):
         Converts a given time range into a list of iso strings per month
         Example: f(1995) -> ['1995-01', '1995-02', ..., '1995-12']
         :param year: year in range 1970..2014
-        :return: a NumPy Array of strings
+        :return: a List of strings
         """
         mo_range = range(1, 13)
         return ["{:04d}-{:02d}".format(year, mo) for mo in mo_range]
@@ -99,9 +99,10 @@ class Indexers(object):
     def year_months_as_vector(year: int, mo_range: Tuple[int, int]) -> List[str]:
         """
         Converts a given time range into a list of iso strings per month
-        Example: f(1995) -> ['1995-01', '1995-02', ..., '1995-12']
+        Example: f(1995, (2, 4)) -> ['1995-02', '1995-03', '1995-04']
         :param year: year in range 1970..2014
-        :return: a NumPy Array of strings
+        :param mo_range: range of months, each month in range 1..12
+        :return: a List of strings
         """
         (mo_min, mo_max) = mo_range
         r = range(mo_min, mo_max + 1)
