@@ -44,11 +44,9 @@ The project currently relies on the following technologies:
 
 Requires Python 3.7.x.
 
-Clone this project:
-
-```shell
-git clone https://gitlab.rcs.griffith.edu.au/d.guillen/silvereye-wps-demo.git
-```
+For GitHub: 
+* Do a Fork and a Pull request. 
+* Clone the forked project.
 
 Prepare and activate a virtual environment:
 
