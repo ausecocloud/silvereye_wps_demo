@@ -7,7 +7,7 @@ It implements core functions that calculate the basic functionality.
 This program performs the following tasks:
 * It reads the ANU Climate variables (temp_max, temp_min, rainfall, solar_radiation, vapour_pressure) 
 from remote databases, via PyDap.
-* It works on specified latitude and longitude rectangular regions, 
+* It works on specified latitude and longitude rectangular regions (within Australia), 
 * It produces monthly, quarterly, yearly average time reductions, as follows: 
     * Monthly Averages (Means)
         * Means for one year, one month
